@@ -4,12 +4,13 @@
 <meta charset="UTF-8" />
 <title>شمارش معکوس عید نوروز ۱۴۰۵</title>
 <link rel="stylesheet" href="font.css" />
+<div id="countdown"></div>
 <style>
   /* بدنه ساده بدون نگارکاری */
   body {
     margin: 0;
     font-family: 'Vazir Variable', sans-serif;
-    background: linear-gradient(135deg, #0B3D91, #1E5CA9, #3A86FF, #74C0FC);
+    background: linear-gradient(135deg, #7A1F1F 0%, #B83232 30%, #E94B4B 60%);
     height: 100vh;
     display: flex;
     justify-content: center;
@@ -19,19 +20,45 @@
     user-select: none;
     color: #fff;
   }
-
   .container {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 28px;
-    position: relative;
-    padding: 30px 50px;
+    gap: 20px;
+    position: center;
+    padding: 30px 40px;
     border-radius: 50px;
     background: rgba(0,0,0,0.35);
     backdrop-filter: blur(10px);
     box-shadow: 0 8px 40px rgba(0,0,0,0.35);
+    overflow: visible;
   }
+  #link {
+  position: fixed;
+  bottom: -150px;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 5px 10px;
+  font-size: 20px;
+  font-weight: 500;
+  color: #fff;
+  text-decoration: none;
+  border-radius: 15px;
+
+  background: rgba(0, 0, 0, 0.4); /* شفافیت با زمینه تیره */
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 0.025px solid rgba(255, 255, 255, 0.2);
+
+  z-index: 9999;
+  text-align: center;
+  transition: 0.3s;
+}
+
+#link:hover {
+  background: rgba(0, 0, 0, 0.6);
+  color: #00aaff;
+}
 
   /* هفت‌سین (اگه نمی‌خوایش، این img رو از HTML حذف کن) */
   .haftsin-icon {
@@ -44,6 +71,7 @@
     display: flex;
     align-items: flex-end;
     justify-content: center;
+    text-align: center;
     /* فاصله‌ی واکنش‌گرا بین آیتم‌ها */
     gap: clamp(2rem, 6vw, 8rem);
     font-weight: 800;
@@ -55,9 +83,8 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    /* عرض ثابت برای ایجاد فاصله بصری معنادار */
-    width: clamp(47px, 0.1vw, 160px);
-    gap: 6px;
+    gap: 0.2rem;  /* فاصله بین عدد و برچسب */
+    width: 50px;   /* میتونی کم یا زیاد کنی */
   }
 
   .time-label {
@@ -104,6 +131,9 @@
         <div id="minutes" class="time-value">۰۰</div>
         <div class="time-label">دقیقه</div>
       </div>
+
+      <a href="https://github.com/mmdparsa-dev/Nowruz-1405-" target="_blank" id="link">مشاهده پروژه در GitHub</a>
+      
       <div class="time-unit" aria-label="ساعت">
         <div id="hours" class="time-value">۰۰</div>
         <div class="time-label">ساعت</div>
@@ -117,7 +147,8 @@
         <div class="time-label">ماه</div>
       </div>
     </div>
-
+  
+    
     <div class="countdown-title-box">
       زمان باقی‌مانده تا تحویل سال ۱۴۰۵
     </div>
