@@ -8,7 +8,8 @@
 body {
   margin: 0;
   font-family: 'Vazir Variable', sans-serif;
-  background: linear-gradient(135deg, #7A1F1F 0%, #B83232 30%, #E94B4B 60%);
+  /* پس‌زمینه ملایم و تیره */
+  background: linear-gradient(135deg, #731616 0%, #A82A2A 60%, #D84545 100%);
   height: 100vh;
   display: flex;
   justify-content: center;
@@ -17,6 +18,7 @@ body {
   color: #fff;
   user-select: none;
 }
+
 .container {
   display: flex;
   flex-direction: column;
@@ -24,9 +26,17 @@ body {
   gap: 20px;
   padding: 30px 40px;
   border-radius: 50px;
-  background: rgba(0,0,0,0.35);
+  background: rgba(255, 255, 255, 0.076);
   backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255,255,255,0.2);
   box-shadow: 0 8px 40px rgba(0,0,0,0.35);
+  border: 1px solid rgba(255,255,255,0.3);
+  }
+
+@keyframes glow {
+  0% { box-shadow: 0 8px 40px rgba(255,255,255,0.2); }
+  100% { box-shadow: 0 12px 60px rgba(255,255,255,0.35); }
 }
 #link {
   position: fixed;
@@ -39,7 +49,7 @@ body {
   color: #fff;
   text-decoration: none;
   border-radius: 15px;
-  background: rgba(0, 0, 0, 0.4);
+  background: rgba(255, 255, 255, 0.1);
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
   border: 0.025px solid rgba(255, 255, 255, 0.2);
@@ -78,13 +88,14 @@ body {
   line-height: 1;
   transition: transform 0.5s ease, opacity 0.5s ease, filter 0.5s ease;
   letter-spacing: 0.04em;
+  text-shadow: 0 0 3px rgba(0, 0, 0, 0.5);
 }
 .countdown-title-box {
   font-weight: 600;
   font-size: clamp(1.2rem, 3.2vw, 1.8rem);
   padding: 18px 32px;
   border-radius: 999px;
-  background: rgba(255,255,255,0.15);
+  background: rgba(0, 0, 0, 0.1);
   backdrop-filter: blur(8px);
   text-align: center;
   box-shadow: 0 4px 15px rgba(0,0,0,0.25);
@@ -120,7 +131,7 @@ body {
     </div>
   </div>
   <a href="https://github.com/mmdparsa-dev/Nowruz-1405-" target="_blank" id="link">مشاهده پروژه در GitHub</a>
-  <div class="countdown-title-box">زمان باقی‌مانده تا تحویل سال ۱۴۰۵</div>
+  <div class="countdown-title-box">زمــــان باقـــــی‌مــــانــــده تا تحویـــــل ســــال ۱۴۰۵</div>
 </div>
 
 <script>
@@ -132,13 +143,12 @@ function toPersianDigits(str) {
 // بررسی کبیسه شمسی
 function isLeapJalali(year) {
   const breaks = [-61, 9, 38, 199, 426, 686, 756, 818, 1111, 1181, 1210, 1635, 2060, 2097, 2192, 2262, 2324, 2394, 2456, 3178];
-  let jump = 0, n = 0, i;
-  for (i = 0; i < breaks.length; i++) {
+  let n = 0;
+  for (let i = 0; i < breaks.length; i++) {
     if (year < breaks[i]) break;
     n = breaks[i];
   }
-  jump = year - n;
-  return (jump % 33) % 4 === 0;
+  return ((year - n) % 33) % 4 === 0;
 }
 
 // تبدیل میلادی به شمسی
@@ -160,8 +170,15 @@ function gregorianToJalali(gy, gm, gd) {
   return [jy, jm, jd];
 }
 
-// تاریخ هدف تحویل سال ۱۴۰۵ (۲۰ مارس ۲۰۲۶)
-const targetUtc = new Date(Date.UTC(2026,2,20,18,16,30,0));
+// تعداد روزهای هر ماه شمسی
+function daysInJalaliMonth(year, month) {
+  if (month <= 6) return 31;
+  if (month <= 11) return 30;
+  return isLeapJalali(year) ? 30 : 29;
+}
+
+// تاریخ هدف تحویل سال ۱۴۰۵ تهران: ۰۲۱۶:۳۰ تهران = ۱۸:۱۶:۳۰ UTC
+const targetUtc = new Date(Date.UTC(2026,2,20,18,16,30));
 
 const elems = {
   months:  document.getElementById('months'),
@@ -199,7 +216,6 @@ function animateChange(elem, newVal) {
 function update() {
   const now = new Date();
   const diff = targetUtc - now;
-
   if (diff < 0) return;
 
   const totalSeconds = Math.floor(diff / 1000);
@@ -210,17 +226,18 @@ function update() {
   const hours = totalHours % 24;
   const totalDays = Math.floor(totalHours / 24);
 
-  // تاریخ فعلی شمسی
   const [jyNow, jmNow, jdNow] = gregorianToJalali(now.getUTCFullYear(), now.getUTCMonth()+1, now.getUTCDate());
   const [jyTarget, jmTarget, jdTarget] = gregorianToJalali(targetUtc.getUTCFullYear(), targetUtc.getUTCMonth()+1, targetUtc.getUTCDate());
 
-  // محاسبه اختلاف دقیق ماه و روز
-  let months = (jyTarget - jyNow)*12 + (jmTarget - jmNow);
+  // محاسبه ماه و روز دقیق
+  let months = (jyTarget - jyNow) * 12 + (jmTarget - jmNow);
   let days = jdTarget - jdNow;
-  if(days < 0){
+  if (days < 0) {
     months -= 1;
-    const daysInPrevMonth = (jmTarget-1 <=6) ? 31 : (jmTarget-1 <=11) ? 30 : (isLeapJalali(jyTarget)?30:29);
-    days += daysInPrevMonth;
+    let prevMonth = jmTarget - 1;
+    let prevYear = jyTarget;
+    if (prevMonth === 0) { prevMonth = 12; prevYear -= 1; }
+    days += daysInJalaliMonth(prevYear, prevMonth);
   }
 
   animateChange(elems.months, toPersianDigits(String(months).padStart(2,'0')));
