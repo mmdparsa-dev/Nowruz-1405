@@ -8,7 +8,6 @@
 body {
   margin: 0;
   font-family: 'Vazir Variable', sans-serif;
-  /* پس‌زمینه ملایم و تیره */
   background: linear-gradient(135deg, #731616 0%, #A82A2A 60%, #D84545 100%);
   height: 100vh;
   display: flex;
@@ -29,15 +28,10 @@ body {
   background: rgba(255, 255, 255, 0.076);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
-  border: 1px solid rgba(255,255,255,0.2);
   box-shadow: 0 8px 40px rgba(0,0,0,0.35);
   border: 1px solid rgba(255,255,255,0.3);
-  }
-
-@keyframes glow {
-  0% { box-shadow: 0 8px 40px rgba(255,255,255,0.2); }
-  100% { box-shadow: 0 12px 60px rgba(255,255,255,0.35); }
 }
+
 #link {
   position: fixed;
   bottom: -150px;
@@ -57,11 +51,9 @@ body {
   text-align: center;
   transition: 0.3s;
 }
-#link:hover {
-  background: rgba(0, 0, 0, 0.6);
-  color: #00aaff;
-}
+
 .haftsine-icon { width: 300px; height: auto; }
+
 .countdown {
   display: flex;
   align-items: flex-end;
@@ -71,6 +63,7 @@ body {
   font-size: clamp(2rem, 5vw, 3.2rem);
   padding: 16px 20px;
 }
+
 .time-unit {
   display: flex;
   flex-direction: column;
@@ -78,11 +71,13 @@ body {
   gap: 0.2rem;
   width: 50px;
 }
+
 .time-label {
   font-size: clamp(0.9rem, 2.2vw, 1.05rem);
   font-weight: 700;
   opacity: 0.95;
 }
+
 .time-value {
   font-size: clamp(2.4rem, 6vw, 3.4rem);
   line-height: 1;
@@ -90,6 +85,7 @@ body {
   letter-spacing: 0.04em;
   text-shadow: 0 0 3px rgba(0, 0, 0, 0.5);
 }
+
 .countdown-title-box {
   font-weight: 600;
   font-size: clamp(1.2rem, 3.2vw, 1.8rem);
@@ -99,9 +95,38 @@ body {
   backdrop-filter: blur(8px);
   text-align: center;
   box-shadow: 0 4px 15px rgba(0,0,0,0.25);
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 0.025px solid rgba(255, 255, 255, 0.2);
 }
+
 @media (max-width: 420px) {
   .haftsine-icon { width: 220px; }
+}
+
+/* پیام فول‌اسکرین با Motion Blur واقعی و ورود از بالا */
+#fullscreen-msg {
+  position: fixed;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%) translateY(-300%);
+  background: rgba(255, 255, 255, 0.076);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  box-shadow: 0 8px 40px rgba(0,0,0,0.35);
+  border: 1px solid rgba(255,255,255,0.3);
+  color: #fff;
+  padding: 20px 30px;
+  font-size: 1.3rem;
+  font-weight: 700;
+  border-radius: 15px;
+  z-index: 10000;
+  text-align: center;
+  opacity: 0;
+  cursor: pointer;
+  filter: blur(15px);
+  transition: transform 0.6s cubic-bezier(0.25,0.46,0.45,0.94), opacity 0.5s ease, filter 0.5s ease;
 }
 </style>
 </head>
@@ -133,6 +158,9 @@ body {
   <a href="https://github.com/mmdparsa-dev/Nowruz-1405-" target="_blank" id="link">مشاهده پروژه در GitHub</a>
   <div class="countdown-title-box">زمــــان باقـــــی‌مــــانــــده تا تحویـــــل ســــال ۱۴۰۵</div>
 </div>
+
+<!-- پیام فول‌اسکرین -->
+<div id="fullscreen-msg">برای full screen شدن کلیک کنید</div>
 
 <script>
 // تبدیل اعداد به فارسی
@@ -177,7 +205,7 @@ function daysInJalaliMonth(year, month) {
   return isLeapJalali(year) ? 30 : 29;
 }
 
-// تاریخ هدف تحویل سال ۱۴۰۵ تهران: ۰۲۱۶:۳۰ تهران = ۱۸:۱۶:۳۰ UTC
+// تاریخ هدف تحویل سال ۱۴۰۵
 const targetUtc = new Date(Date.UTC(2026,2,20,18,16,30));
 
 const elems = {
@@ -229,7 +257,6 @@ function update() {
   const [jyNow, jmNow, jdNow] = gregorianToJalali(now.getUTCFullYear(), now.getUTCMonth()+1, now.getUTCDate());
   const [jyTarget, jmTarget, jdTarget] = gregorianToJalali(targetUtc.getUTCFullYear(), targetUtc.getUTCMonth()+1, targetUtc.getUTCDate());
 
-  // محاسبه ماه و روز دقیق
   let months = (jyTarget - jyNow) * 12 + (jmTarget - jmNow);
   let days = jdTarget - jdNow;
   if (days < 0) {
@@ -249,6 +276,38 @@ function update() {
 
 setInterval(update, 250);
 update();
+
+// پیام فول‌اسکرین Motion Blur
+const msg = document.getElementById('fullscreen-msg');
+let autoClose;
+
+// ورود Motion Blur از بالا
+setTimeout(() => {
+  msg.style.transform = "translateX(-50%) translateY(50%)";
+  msg.style.opacity = "1";
+  msg.style.filter = "blur(0)";
+}, 100);
+
+// خروج Motion Blur
+function hideMessage() {
+  msg.style.opacity = "0";
+  msg.style.filter = "blur(15px)";
+  msg.style.transform = "translateX(-50%) translateY(-300%)";
+  setTimeout(() => msg.remove(), 600);
+  clearTimeout(autoClose);
+}
+
+// خودکار بعد ۳ ثانیه
+autoClose = setTimeout(hideMessage, 3000);
+
+// کلیک → فول‌اسکرین + حذف سریع
+msg.addEventListener('click', () => {
+  const elem = document.documentElement;
+  if (elem.requestFullscreen) elem.requestFullscreen();
+  else if (elem.webkitRequestFullscreen) elem.webkitRequestFullscreen();
+  else if (elem.msRequestFullscreen) elem.msRequestFullscreen();
+  hideMessage();
+});
 </script>
 </body>
 </html>
