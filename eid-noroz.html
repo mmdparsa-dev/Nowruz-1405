@@ -91,21 +91,19 @@ body {
   font-size: clamp(1.2rem, 3.2vw, 1.8rem);
   padding: 18px 32px;
   border-radius: 999px;
-  background: rgba(0, 0, 0, 0.1);
+  background: rgba(255, 255, 255, 0.1);
   backdrop-filter: blur(8px);
   text-align: center;
   box-shadow: 0 4px 15px rgba(0,0,0,0.25);
-  background: rgba(255, 255, 255, 0.1);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
   border: 0.025px solid rgba(255, 255, 255, 0.2);
 }
 
 @media (max-width: 420px) {
   .haftsine-icon { width: 220px; }
+  #fullscreen-msg { font-size: clamp(1rem, 4vw, 1.3rem); padding: 15px 20px; }
 }
 
-/* پیام فول‌اسکرین با Motion Blur واقعی و ورود از بالا */
+/* پیام فول‌اسکرین با Motion Blur و ورود از بالا */
 #fullscreen-msg {
   position: fixed;
   top: 0;
@@ -126,7 +124,7 @@ body {
   opacity: 0;
   cursor: pointer;
   filter: blur(15px);
-  transition: transform 0.6s cubic-bezier(0.25,0.46,0.45,0.94), opacity 0.5s ease, filter 0.5s ease;
+  transition: transform 0.8s cubic-bezier(0.25,0.46,0.45,0.94), opacity 0.5s ease, filter 0.5s ease;
 }
 </style>
 </head>
@@ -277,18 +275,18 @@ function update() {
 setInterval(update, 250);
 update();
 
-// پیام فول‌اسکرین Motion Blur
+// پیام فول‌اسکرین Motion Blur با ویبره
 const msg = document.getElementById('fullscreen-msg');
 let autoClose;
 
-// ورود Motion Blur از بالا
-setTimeout(() => {
-  msg.style.transform = "translateX(-50%) translateY(50%)";
+function showFullscreenMessage() {
+  msg.style.transform = "translateX(-50%) translateY(250%)";
   msg.style.opacity = "1";
   msg.style.filter = "blur(0)";
-}, 100);
+  if (navigator.vibrate) navigator.vibrate(50); // ویبره ریز
+  autoClose = setTimeout(hideMessage, 4000);
+}
 
-// خروج Motion Blur
 function hideMessage() {
   msg.style.opacity = "0";
   msg.style.filter = "blur(15px)";
@@ -297,8 +295,19 @@ function hideMessage() {
   clearTimeout(autoClose);
 }
 
-// خودکار بعد ۳ ثانیه
-autoClose = setTimeout(hideMessage, 3000);
+// ورود اولیه پیام
+setTimeout(showFullscreenMessage, 100);
+
+// دوباره ظاهر شدن پیام در صورت خروج از فول‌اسکرین
+document.addEventListener('fullscreenchange', () => {
+  if (!document.fullscreenElement) {
+    const body = document.body;
+    if (!document.body.contains(msg)) {
+      document.body.appendChild(msg);
+    }
+    setTimeout(showFullscreenMessage, 100);
+  }
+});
 
 // کلیک → فول‌اسکرین + حذف سریع
 msg.addEventListener('click', () => {
