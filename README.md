@@ -16,4 +16,4 @@ To view the latest beta version, visit: https://mmdparsa-dev.github.io/Nowruz-14
 
 برای مشاهده جدید ترین نسخه ی بتا به https://mmdparsa-dev.github.io/Nowruz-1405-/betav/eid-noroz.html مراجعه کنید.
 
-صفحه ی اصلی پروژه:-https://mmdparsa-dev.github.io/Nowruz-1405
+صفحه ی اصلی پروژه:https://mmdparsa-dev.github.io/Nowruz-1405-
