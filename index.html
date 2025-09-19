@@ -1,129 +1,181 @@
 <!doctype html>
 <html lang="fa" dir="rtl">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>صفحه اصلی پروژه</title>
-  <meta name="description" content="صفحهٔ ساده و مینیمال برای GitHub Pages — فارسی و راست‌چین" />
-  <!-- فایل CSS فونت وزیر خودت -->
-  <link rel="stylesheet" href="font.css">
-  <style>
-    :root{
-      --bg: linear-gradient(135deg,#f8fbff 0%,#eef7ff 50%,#f5fbff 100%);
-      --card: rgba(255,255,255,0.85);
-      --glass: rgba(255,255,255,0.6);
-      --accent: #1e88ff;
-      --muted: #6b7280;
-      color-scheme: light;
-    }
-    *{box-sizing:border-box}
-    html,body{height:100%}
-    body{
-      margin:0;
-      font-family: 'Vazir Variable', sans-serif;
-      font-weight: 400;
-      background:var(--bg);
-      -webkit-font-smoothing:antialiased;
-      -moz-osx-font-smoothing:grayscale;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      padding:32px;
-      color:#0f172a;
-    }
-
-    .card{
-      width:100%;
-      max-width:880px;
-      background:var(--card);
-      border-radius:14px;
-      padding:28px 30px;
-      box-shadow: 0 8px 30px rgba(16,24,40,0.08);
-      backdrop-filter: blur(6px) saturate(120%);
-      border:1px solid rgba(16,24,40,0.04);
-      transition: transform 0.3s ease, box-shadow 0.3s ease, opacity 0.6s ease;
-      opacity:0;
-      animation: fadeIn 1s forwards;
-    }
-    .card:hover{
-      transform: translateY(-6px);
-      box-shadow: 0 16px 40px rgba(16,24,40,0.15);
-    }
-
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(10px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    .row{display:flex;align-items:center;gap:16px}
-    header .logo{
-      width:56px;height:56px;border-radius:10px;display:grid;place-items:center;
-      background:linear-gradient(180deg,var(--accent),#60a5fa);
-      color:#fff;font-weight:700;font-size:20px;flex:0 0 56px;
-      box-shadow: 0 6px 18px rgba(30,88,255,0.18);
-      transition: transform 0.2s ease;
-    }
-    .logo:hover{transform: rotate(15deg) scale(1.1);}
-
-    h1{margin:0;font-weight:600;font-size:20px}
-    p.lead{margin:6px 0 18px;color:var(--muted);font-size:15px}
-
-    .actions{display:flex;gap:10px;flex-wrap:wrap}
-    .btn{
-      padding:10px 14px;border-radius:10px;border:0;cursor:pointer;font-weight:600;
-      background:transparent;border:1px solid rgba(15,23,42,0.06);
-      transition: transform .2s ease, box-shadow .2s ease, background 0.3s ease;
-      text-decoration:none;color:inherit;display:inline-flex;align-items:center;gap:8px;
-    }
-
-    .btn.primary{
-      background:linear-gradient(90deg,var(--accent),#3b82f6);color:#fff;border:0;box-shadow:0 6px 20px rgba(59,130,246,0.18)
-    }
-    .btn:hover{
-      transform: translateY(-2px);
-      box-shadow: 0 8px 24px rgba(16,24,40,0.12);
-    }
-    .btn.primary:hover{
-      background:linear-gradient(90deg,#3b82f6,#1e88ff);
-    }
-    .btn:active{transform:translateY(1px)}
-
-    .meta{margin-top:18px;color:var(--muted);font-size:13px;display:flex;gap:18px;align-items:center}
-
-    footer{margin-top:20px;text-align:center;color:var(--muted);font-size:13px}
-
-    @media (max-width:520px){
-      .card{padding:18px}
-      h1{font-size:18px}
-    }
-  </style>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>صفحه اصلی پروژه</title>
+<meta name="description" content="صفحهٔ ساده و مینیمال برای GitHub Pages — فارسی و راست‌چین" />
+<link rel="stylesheet" href="font.css">
+<style>
+:root{
+  --bg: linear-gradient(135deg,#f8fbff 0%,#eef7ff 50%,#f5fbff 100%);
+  --card: rgba(255,255,255,0.85);
+  --glass: rgba(255,255,255,0.6);
+  --accent: #1e88ff;
+  --muted: #6b7280;
+  --text: #0f172a;
+  --footer: #6b7280;
+  color-scheme: light;
+  transition: all 0.5s ease;
+}
+:root[data-theme="dark"]{
+  --bg: linear-gradient(135deg,#1f2937 0%,#111827 50%,#1e293b 100%);
+  --card: rgba(30,30,30,0.85);
+  --glass: rgba(30,30,30,0.6);
+  --accent: #3b82f6;
+  --muted: #9ca3af;
+  --text: #e5e7eb;
+  --footer: #9ca3af;
+  color-scheme: dark;
+}
+*{box-sizing:border-box}
+html,body{height:100%}
+body{
+  margin:0;
+  font-family: 'Vazir Variable', sans-serif;
+  font-weight: 400;
+  background:var(--bg);
+  color: var(--text);
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:32px;
+  transition: background 0.5s ease,color 0.5s ease;
+}
+.card{
+  width:100%;
+  max-width:880px;
+  background:var(--card);
+  color: var(--text);
+  border-radius:14px;
+  padding:28px 30px;
+  box-shadow: 0 8px 30px rgba(16,24,40,0.08);
+  backdrop-filter: blur(6px) saturate(120%);
+  border:1px solid rgba(16,24,40,0.04);
+  transition: all 0.5s ease, transform 0.3s ease, box-shadow 0.3s ease, opacity 0.6s ease;
+  opacity:0;
+  animation: fadeIn 1s forwards;
+}
+.card:hover{
+  transform: translateY(-6px);
+  box-shadow: 0 16px 40px rgba(16,24,40,0.15);
+}
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.row{display:flex;align-items:center;gap:16px}
+.logo{
+  width:56px;
+  height:56px;
+  border-radius:10px;
+  display:grid;
+  place-items:center;
+  box-shadow: 0 6px 18px rgba(30,88,255,0.18);
+  transition: transform 0.3s ease;
+}
+.logo img{
+  width:40px;
+  height:40px;
+}
+h1{margin:0;font-weight:600;font-size:20px}
+p.lead{margin:6px 0 18px;color:var(--muted);font-size:15px}
+.actions{display:flex;gap:10px;flex-wrap:wrap}
+.btn{
+  padding:10px 14px;border-radius:10px;border:0;cursor:pointer;font-weight:600;
+  background:transparent;border:1px solid rgba(15,23,42,0.06);
+  transition: transform .2s ease, box-shadow .2s ease, background 0.3s ease,color 0.3s ease;
+  text-decoration:none;color:inherit;display:inline-flex;align-items:center;gap:8px;
+}
+.btn.primary{
+  background:linear-gradient(90deg,var(--accent),#3b82f6);color:#fff;border:0;
+  box-shadow:0 6px 20px rgba(59,130,246,0.18)
+}
+.btn:hover{
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(16,24,40,0.12);
+}
+.btn.primary:hover{
+  background:linear-gradient(90deg,#3b82f6,#1e88ff);
+}
+.btn:active{transform:translateY(1px)}
+#themeSwitch{
+  position: relative;
+  width: 50px;
+  height: 28px;
+  border-radius: 14px;
+  background: var(--glass);
+  border: 1px solid rgba(15,23,42,0.1);
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+#themeSwitch::before{
+  content: '';
+  position: absolute;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  top: 3px;
+  left: 3px;
+  background: var(--accent);
+  transition: transform 0.3s ease, background 0.3s ease;
+}
+#themeSwitch.active::before{
+  transform: translateX(22px);
+  background: #fbbf24;
+}
+.meta{margin-top:18px;color:var(--muted);font-size:13px;display:flex;gap:18px;align-items:center}
+footer{margin-top:20px;text-align:center;color:var(--footer);font-size:13px}
+@media (max-width:520px){
+  .card{padding:18px}
+  h1{font-size:18px}
+}
+</style>
 </head>
 <body>
-  <main class="card" role="main">
-    <div class="row" style="justify-content:space-between;align-items:center">
-      <div style="display:flex;gap:14px;align-items:center">
-        <div class="logo">ف</div>
-        <div>
-          <h1>Nowruz 1405</h1>
-          <p class="lead">شمارش معکوس نوروز ۱۴۰۵ — مینیمال، واضح و فارسی.</p>
-        </div>
+<main class="card" role="main">
+  <div class="row" style="justify-content:space-between;align-items:center">
+    <div style="display:flex;gap:14px;align-items:center">
+      <div class="logo">
+        <img src="Icon(images)/logo-nowroz.svg" alt="لوگو">
       </div>
-      <nav class="actions">
-        <a class="btn primary" href="https://mmdparsa-dev.github.io/Nowruz-1405-/betav/eid-noroz.html" id="betaBtn">نسخهٔ بتا</a>
-        <a class="btn" href="https://mmdparsa-dev.github.io/Nowruz-1405-/eid-noroz.html" id="stableBtn">نسخهٔ پایدار</a>
-        <a class="btn" href="https://mmdparsa-dev.github.io/Nowruz-1405-/README.md" id="readmeBtn">Readme</a>
-        <a class="btn" href="https://github.com/mmdparsa-dev/Nowruz-1405-" id="repoBtn">مخزن</a>
-      </nav>
+      <div>
+        <h1>Nowruz 1405</h1>
+        <p class="lead">شمارش معکوس نوروز ۱۴۰۵ — مینیمال، واضح و فارسی.</p>
+      </div>
     </div>
-
-    <div class="meta">
-      <div>📦نسخه ی شمارش معکوس: <strong id="version">3.0 Stable</strong></div>
-      <div>✨ وضعیت: <span id="status">آماده</span></div>
-    </div>
-
-    <footer>
-    ساخته شده با گلب❤️ - توی ایران،مشهد
-    </footer>
-  </main>
+    <nav class="actions">
+      <a class="btn primary" href="https://mmdparsa-dev.github.io/Nowruz-1405-/betav/eid-noroz.html" id="betaBtn">نسخهٔ بتا</a>
+      <a class="btn" href="https://mmdparsa-dev.github.io/Nowruz-1405-/eid-noroz.html" id="stableBtn">نسخهٔ پایدار</a>
+      <a class="btn" href="https://mmdparsa-dev.github.io/Nowruz-1405-/README.md" id="readmeBtn">Readme</a>
+      <a class="btn" href="https://github.com/mmdparsa-dev/Nowruz-1405-" id="repoBtn">مخزن</a>
+      <div id="themeSwitch"></div>
+    </nav>
+  </div>
+  <div class="meta">
+    <div>📦نسخه ی شمارش معکوس: <strong id="version">3.0 Stable</strong></div>
+    <div>✨ وضعیت: <span id="status">آماده</span></div>
+  </div>
+  <footer>❤️ ساخته شده توسط گلب - توی ایران،مشهد</footer>
+</main>
+<script>
+const switchBtn = document.getElementById('themeSwitch');
+const html = document.documentElement;
+if(window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches){
+  html.setAttribute('data-theme','dark');
+  switchBtn.classList.add('active');
+}
+switchBtn.addEventListener('click', () => {
+  if(html.getAttribute('data-theme') === 'dark'){
+    html.removeAttribute('data-theme');
+    switchBtn.classList.remove('active');
+  } else {
+    html.setAttribute('data-theme','dark');
+    switchBtn.classList.add('active');
+  }
+});
+</script>
 </body>
 </html>
