@@ -7,15 +7,35 @@
 <style>
 body {
   margin: 0;
-  font-family: 'Vazir Variable', sans-serif;
-  background: linear-gradient(135deg, #731616 0%, #A82A2A 60%, #D84545 100%);
   height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
   overflow: hidden;
+  font-family: 'Vazir Variable', sans-serif;
   color: #fff;
   user-select: none;
+  background: linear-gradient(135deg, #2E8B57, #1E90FF, #FF7F50, #FFD700, #3CB371, #87CEFA);
+  background-size: 600% 600%;
+  animation: vibrantGradient 25s ease infinite;
+  transition: background 0.8s ease;
+}
+
+@keyframes vibrantGradient {
+  0% { background-position: 0% 50%; }
+  20% { background-position: 50% 50%; }
+  40% { background-position: 100% 50%; }
+  60% { background-position: 50% 50%; }
+  80% { background-position: 0% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+@media (max-width: 420px) {
+  body {
+    background: linear-gradient(135deg, #2E8B57, #1E90FF, #FF7F50, #FFD700, #3CB371, #87CEFA);
+    background-size: 600% 600%;
+    animation: vibrantGradient 25s ease infinite;
+  }
 }
 
 .container {
@@ -25,13 +45,13 @@ body {
   gap: 20px;
   padding: 30px 40px;
   border-radius: 50px;
-  background: rgba(255, 255, 255, 0.076);
+  background: rgba(255,255,255,0.076);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
   box-shadow: 0 8px 40px rgba(0,0,0,0.35);
   border: 1px solid rgba(255,255,255,0.3);
+  transition: all 0.5s ease;
 }
-
 #link {
   position: fixed;
   bottom: -150px;
@@ -43,27 +63,24 @@ body {
   color: #fff;
   text-decoration: none;
   border-radius: 15px;
-  background: rgba(255, 255, 255, 0.1);
+  background: rgba(255,255,255,0.1);
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
-  border: 0.025px solid rgba(255, 255, 255, 0.2);
+  border: 0.025px solid rgba(255,255,255,0.2);
   z-index: 9999;
   text-align: center;
-  transition: 0.3s;
+  transition: all 0.5s ease;
 }
-
 .haftsine-icon { width: 300px; height: auto; }
-
 .countdown {
   display: flex;
   align-items: flex-end;
   justify-content: center;
-  gap: clamp(2rem, 6vw, 8rem);
+  gap: clamp(2rem,6vw,8rem);
   font-weight: 800;
-  font-size: clamp(2rem, 5vw, 3.2rem);
+  font-size: clamp(2rem,5vw,3.2rem);
   padding: 16px 20px;
 }
-
 .time-unit {
   display: flex;
   flex-direction: column;
@@ -71,45 +88,41 @@ body {
   gap: 0.2rem;
   width: 50px;
 }
-
 .time-label {
-  font-size: clamp(0.9rem, 2.2vw, 1.05rem);
+  font-size: clamp(0.9rem,2.2vw,1.05rem);
   font-weight: 700;
   opacity: 0.95;
 }
-
 .time-value {
-  font-size: clamp(2.4rem, 6vw, 3.4rem);
+  font-size: clamp(2.4rem,6vw,3.4rem);
   line-height: 1;
-  transition: transform 0.5s ease, opacity 0.5s ease, filter 0.5s ease;
+  transition: transform 0.8s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.8s ease, filter 0.8s ease;
   letter-spacing: 0.04em;
-  text-shadow: 0 0 3px rgba(0, 0, 0, 0.5);
 }
-
 .countdown-title-box {
   font-weight: 600;
-  font-size: clamp(1.2rem, 3.2vw, 1.8rem);
+  font-size: clamp(1.2rem,3.2vw,1.8rem);
   padding: 18px 32px;
   border-radius: 999px;
-  background: rgba(255, 255, 255, 0.1);
+  background: rgba(255,255,255,0.1);
   backdrop-filter: blur(8px);
   text-align: center;
   box-shadow: 0 4px 15px rgba(0,0,0,0.25);
-  border: 0.025px solid rgba(255, 255, 255, 0.2);
+  border: 0.025px solid rgba(255,255,255,0.2);
+  transition: all 0.5s ease;
 }
-
 @media (max-width: 420px) {
   .haftsine-icon { width: 220px; }
-  #fullscreen-msg { font-size: clamp(1rem, 4vw, 1.3rem); padding: 15px 20px; }
+  #fullscreen-msg { font-size: clamp(1rem,4vw,1.3rem); padding: 15px 20px; }
+  .countdown { gap: clamp(1rem,4vw,5rem); font-size: clamp(1.5rem,4vw,2.2rem); }
+  .time-value { font-size: clamp(1.8rem,4vw,2.5rem); }
 }
-
-/* پیام فول‌اسکرین با Motion Blur و ورود از بالا */
 #fullscreen-msg {
   position: fixed;
   top: 0;
   left: 50%;
   transform: translateX(-50%) translateY(-300%);
-  background: rgba(255, 255, 255, 0.076);
+  background: rgba(255,255,255,0.076);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
   box-shadow: 0 8px 40px rgba(0,0,0,0.35);
@@ -124,198 +137,254 @@ body {
   opacity: 0;
   cursor: pointer;
   filter: blur(15px);
-  transition: transform 0.8s cubic-bezier(0.25,0.46,0.45,0.94), opacity 0.5s ease, filter 0.5s ease;
+  transition: all 0.5s ease;
 }
+#celebration {
+  display: none;
+  position: fixed;
+  top:0; left:0;
+  width:100%; height:100%;
+  background: rgba(0,0,0,0.8);
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  z-index: 10000;
+  text-align: center;
+  overflow: hidden;
+}
+#fireworks {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top:0;
+  left:0;
+  pointer-events: none;
+}
+.particle {
+  position: absolute;
+  font-size: 2rem;
+  animation: particleAnim 1.2s forwards;
+  user-select: none;
+}
+#newyear-msg {
+  color: #FFD700;
+  font-size: 3rem;
+  font-weight: 800;
+  margin-top: 20px;
+  background: rgba(255,255,255,0.076);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  box-shadow: 0 8px 40px rgba(0,0,0,0.35);
+  border: 1px solid rgba(255,255,255,0.3);
+  border-radius: 20px;
+  padding: 20px 40px;
+  opacity: 0;
+  animation: msgFade 2s forwards 0.5s;
+  text-align: center;
+  transition: all 0.5s ease;
+}
+@keyframes particleAnim { 0%{transform:translate(0,0) scale(1);opacity:1;}100%{transform:translate(var(--x),var(--y)) scale(1.5);opacity:0;} }
+@keyframes msgFade { to{opacity:1;} }
+#design-switch {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 10000;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+   background: rgba(255,255,255,0.076);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  box-shadow: 0 8px 40px rgba(0,0,0,0.35);
+  border: 1px solid rgba(255,255,255,0.3);
+  color: #fff;
+  font-size: 1rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.5s ease;
+  overflow: hidden;
+}
+#design-switch.expanded {
+  width: 140px;
+  border-radius: 25px;
+  font-size: 1rem;
+}
+body.dark #design-switch { background: rgba(0,0,0,0.4); }
+body.dark .container,
+body.dark #fullscreen-msg,
+body.dark #newyear-msg,
+body.dark #link {
+  background: rgba(0,0,0,0.5);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255,255,255,0.05);
+  box-shadow: 0 8px 40px rgba(0,0,0,0.5);
+  color: #fff;
+  transition: all 0.5s ease;
+}
+body.dark::after {
+  content: "";
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.4);
+  pointer-events: none;
+  z-index: -1;
+}
+
 </style>
 </head>
 <body>
-<div class="container" aria-label="شمارش معکوس عید نوروز ۱۴۰۵">
+<div class="container">
   <img src="Icon(images)/haft-sin.png" alt="هفت‌سین" class="haftsine-icon" />
-  <div class="countdown" aria-label="شمارش معکوس تا تحویل سال ۱۴۰۵">
-    <div class="time-unit" aria-label="ثانیه">
-      <div id="seconds" class="time-value" aria-live="polite">۰۰</div>
-      <div class="time-label">ثانیه</div>
-    </div>
-    <div class="time-unit" aria-label="دقیقه">
-      <div id="minutes" class="time-value" aria-live="polite">۰۰</div>
-      <div class="time-label">دقیقه</div>
-    </div>
-    <div class="time-unit" aria-label="ساعت">
-      <div id="hours" class="time-value" aria-live="polite">۰۰</div>
-      <div class="time-label">ساعت</div>
-    </div>
-    <div class="time-unit" aria-label="روز">
-      <div id="days" class="time-value" aria-live="polite">۰۰</div>
-      <div class="time-label">روز</div>
-    </div>
-    <div class="time-unit" aria-label="ماه">
-      <div id="months" class="time-value" aria-live="polite">۰۰</div>
-      <div class="time-label">ماه</div>
-    </div>
+  <div class="countdown">
+    <div class="time-unit"><div id="seconds" class="time-value" aria-live="polite">۰۰</div><div class="time-label">ثانیه</div></div>
+    <div class="time-unit"><div id="minutes" class="time-value" aria-live="polite">۰۰</div><div class="time-label">دقیقه</div></div>
+    <div class="time-unit"><div id="hours" class="time-value" aria-live="polite">۰۰</div><div class="time-label">ساعت</div></div>
+    <div class="time-unit"><div id="days" class="time-value" aria-live="polite">۰۰</div><div class="time-label">روز</div></div>
+    <div class="time-unit"><div id="months" class="time-value" aria-live="polite">۰۰</div><div class="time-label">ماه</div></div>
   </div>
   <a href="https://github.com/mmdparsa-dev/Nowruz-1405-" target="_blank" id="link">مشاهده پروژه در GitHub</a>
   <div class="countdown-title-box">زمــــان باقـــــی‌مــــانــــده تا تحویـــــل ســــال ۱۴۰۵</div>
 </div>
-
-<!-- پیام فول‌اسکرین -->
+<div id="celebration">
+  <div id="fireworks"></div>
+  <div id="newyear-msg">سال نو مبارک!</div>
+</div>
 <div id="fullscreen-msg">برای full screen شدن کلیک کنید</div>
-
+<button id="design-switch">1L</button>
 <script>
-// تبدیل اعداد به فارسی
-function toPersianDigits(str) {
-  return str.toString().replace(/\d/g, d => '۰۱۲۳۴۵۶۷۸۹'[d]);
-}
+function toPersianDigits(str){return str.toString().replace(/\d/g,d=>'۰۱۲۳۴۵۶۷۸۹'[d]);}
+function isLeapJalali(year){const breaks=[-61,9,38,199,426,686,756,818,1111,1181,1210,1635,2060,2097,2192,2262,2324,2394,2456,3178];let n=0;for(let i=0;i<breaks.length;i++){if(year<breaks[i])break;n=breaks[i];}return((year-n)%33)%4===0;}
+function gregorianToJalali(gy,gm,gd){let g_d_m=[0,31,59,90,120,151,181,212,243,273,304,334];let jy=gy-621;let days=365*(gy-1600)+Math.floor((gy-1600+3)/4)-Math.floor((gy-1600+99)/100)+Math.floor((gy-1600+399)/400)+gd+g_d_m[gm-1]-1-79;let j_np=Math.floor(days/12053);days%=12053;jy=979+33*j_np+4*Math.floor(days/1461);days%=1461;if(days>=366){jy+=Math.floor((days-1)/365);days=(days-1)%365;}let jm=(days<186)?1+Math.floor(days/31):7+Math.floor((days-186)/30);let jd=1+((days<186)?(days%31):((days-186)%30));return[jy,jm,jd];}
+function daysInJalaliMonth(year,month){if(month<=6)return 31;if(month<=11)return 30;return isLeapJalali(year)?30:29;}
 
-// بررسی کبیسه شمسی
-function isLeapJalali(year) {
-  const breaks = [-61, 9, 38, 199, 426, 686, 756, 818, 1111, 1181, 1210, 1635, 2060, 2097, 2192, 2262, 2324, 2394, 2456, 3178];
-  let n = 0;
-  for (let i = 0; i < breaks.length; i++) {
-    if (year < breaks[i]) break;
-    n = breaks[i];
-  }
-  return ((year - n) % 33) % 4 === 0;
-}
+const targetUtc=new Date(Date.UTC(2026,2,20,18,16,30));
+const elems={months:document.getElementById('months'),days:document.getElementById('days'),hours:document.getElementById('hours'),minutes:document.getElementById('minutes'),seconds:document.getElementById('seconds')};
+const prevValues={};
 
-// تبدیل میلادی به شمسی
-function gregorianToJalali(gy, gm, gd) {
-  let g_d_m = [0,31,59,90,120,151,181,212,243,273,304,334];
-  let jy = gy - 621;
-  let gy2 = (gm > 2) ? (gy + 1) : gy;
-  let days = 365*(gy-1600) + Math.floor((gy-1600+3)/4) - Math.floor((gy-1600+99)/100) + Math.floor((gy-1600+399)/400) + gd + g_d_m[gm-1] - 1 - 79;
-  let j_np = Math.floor(days / 12053);
-  days %= 12053;
-  jy = 979 + 33*j_np + 4*Math.floor(days/1461);
-  days %= 1461;
-  if (days >= 366) {
-    jy += Math.floor((days-1)/365);
-    days = (days-1)%365;
-  }
-  let jm = (days < 186) ? 1 + Math.floor(days/31) : 7 + Math.floor((days-186)/30);
-  let jd = 1 + ((days < 186) ? (days%31) : ((days-186)%30));
-  return [jy, jm, jd];
-}
-
-// تعداد روزهای هر ماه شمسی
-function daysInJalaliMonth(year, month) {
-  if (month <= 6) return 31;
-  if (month <= 11) return 30;
-  return isLeapJalali(year) ? 30 : 29;
-}
-
-// تاریخ هدف تحویل سال ۱۴۰۵
-const targetUtc = new Date(Date.UTC(2026,2,20,18,16,30));
-
-const elems = {
-  months:  document.getElementById('months'),
-  days:    document.getElementById('days'),
-  hours:   document.getElementById('hours'),
-  minutes: document.getElementById('minutes'),
-  seconds: document.getElementById('seconds'),
-};
-
-const prevValues = {};
-
-function animateChange(elem, newVal) {
-  if (!elem || prevValues[elem.id] === newVal) return;
-  prevValues[elem.id] = newVal;
-
-  elem.style.transform = 'translateY(-100%)';
-  elem.style.opacity   = '0';
-  elem.style.filter    = 'blur(6px)';
-
-  setTimeout(() => {
-    elem.textContent = newVal;
-    elem.style.transition = 'none';
-    elem.style.transform  = 'translateY(100%)';
-    elem.style.opacity    = '0';
-    elem.style.filter     = 'blur(2px)';
+function animateChange(elem,newVal){
+  if(!elem||prevValues[elem.id]===newVal) return;
+  prevValues[elem.id]=newVal;
+  elem.style.transform='translateY(-100%)';
+  elem.style.opacity='0';
+  elem.style.filter='blur(6px)';
+  setTimeout(()=>{
+    elem.textContent=newVal;
+    elem.style.transition='none';
+    elem.style.transform='translateY(100%)';
+    elem.style.opacity='0';
+    elem.style.filter='blur(2px)';
     void elem.offsetWidth;
-
-    elem.style.transition = 'transform 1s ease, opacity 1s ease, filter 1s ease';
-    elem.style.transform  = 'translateY(0)';
-    elem.style.opacity    = '1';
-    elem.style.filter     = 'blur(0)';
-  }, 500);
+    elem.style.transition='transform 0.8s cubic-bezier(0.25,1,0.5,1), opacity 0.8s ease, filter 0.8s ease';
+    elem.style.transform='translateY(0)';
+    elem.style.opacity='1';
+    elem.style.filter='blur(0)';
+  },500);
 }
 
-function update() {
-  const now = new Date();
-  const diff = targetUtc - now;
-  if (diff < 0) return;
+function update(){
+  const now=new Date();
+  const diff=targetUtc-now;
+  if(diff<=0){showCelebration();return;}
+  const totalSeconds=Math.floor(diff/1000);
+  const seconds=totalSeconds%60;
+  const totalMinutes=Math.floor(totalSeconds/60);
+  const minutes=totalMinutes%60;
+  const totalHours=Math.floor(totalMinutes/60);
+  const hours=totalHours%24;
+  const totalDays=Math.floor(totalHours/24);
 
-  const totalSeconds = Math.floor(diff / 1000);
-  const seconds = totalSeconds % 60;
-  const totalMinutes = Math.floor(totalSeconds / 60);
-  const minutes = totalMinutes % 60;
-  const totalHours = Math.floor(totalMinutes / 60);
-  const hours = totalHours % 24;
-  const totalDays = Math.floor(totalHours / 24);
-
-  const [jyNow, jmNow, jdNow] = gregorianToJalali(now.getUTCFullYear(), now.getUTCMonth()+1, now.getUTCDate());
-  const [jyTarget, jmTarget, jdTarget] = gregorianToJalali(targetUtc.getUTCFullYear(), targetUtc.getUTCMonth()+1, targetUtc.getUTCDate());
-
-  let months = (jyTarget - jyNow) * 12 + (jmTarget - jmNow);
-  let days = jdTarget - jdNow;
-  if (days < 0) {
-    months -= 1;
-    let prevMonth = jmTarget - 1;
-    let prevYear = jyTarget;
-    if (prevMonth === 0) { prevMonth = 12; prevYear -= 1; }
-    days += daysInJalaliMonth(prevYear, prevMonth);
+  const [jyNow,jmNow,jdNow]=gregorianToJalali(now.getUTCFullYear(),now.getUTCMonth()+1,now.getUTCDate());
+  const [jyTarget,jmTarget,jdTarget]=gregorianToJalali(targetUtc.getUTCFullYear(),targetUtc.getUTCMonth()+1,targetUtc.getUTCDate());
+  let months=(jyTarget-jyNow)*12+(jmTarget-jmNow);
+  let days=jdTarget-jdNow;
+  while(days<0){
+    months-=1;
+    let prevMonth=jmTarget-1;
+    let prevYear=jyTarget;
+    if(prevMonth===0){prevMonth=12; prevYear-=1;}
+    days+=daysInJalaliMonth(prevYear,prevMonth);
   }
 
-  animateChange(elems.months, toPersianDigits(String(months).padStart(2,'0')));
-  animateChange(elems.days, toPersianDigits(String(days).padStart(2,'0')));
-  animateChange(elems.hours, toPersianDigits(String(hours).padStart(2,'0')));
-  animateChange(elems.minutes, toPersianDigits(String(minutes).padStart(2,'0')));
-  animateChange(elems.seconds, toPersianDigits(String(seconds).padStart(2,'0')));
+  animateChange(elems.months,toPersianDigits(String(months).padStart(2,'0')));
+  animateChange(elems.days,toPersianDigits(String(days).padStart(2,'0')));
+  animateChange(elems.hours,toPersianDigits(String(hours).padStart(2,'0')));
+  animateChange(elems.minutes,toPersianDigits(String(minutes).padStart(2,'0')));
+  animateChange(elems.seconds,toPersianDigits(String(seconds).padStart(2,'0')));
 }
 
-setInterval(update, 250);
+setInterval(update,500);
 update();
 
-// پیام فول‌اسکرین Motion Blur با ویبره
-const msg = document.getElementById('fullscreen-msg');
+const msg=document.getElementById('fullscreen-msg');
 let autoClose;
 
-function showFullscreenMessage() {
-  msg.style.transform = "translateX(-50%) translateY(250%)";
-  msg.style.opacity = "1";
-  msg.style.filter = "blur(0)";
-  if (navigator.vibrate) navigator.vibrate(50); // ویبره ریز
-  autoClose = setTimeout(hideMessage, 4000);
+function showFullscreenMessage(){
+  msg.style.transform="translateX(-50%) translateY(250%)";
+  msg.style.opacity="1";
+  msg.style.filter="blur(0)";
+  if(navigator.vibrate)navigator.vibrate(50);
+  autoClose=setTimeout(hideMessage,4000);
 }
 
-function hideMessage() {
-  msg.style.opacity = "0";
-  msg.style.filter = "blur(15px)";
-  msg.style.transform = "translateX(-50%) translateY(-300%)";
-  setTimeout(() => msg.remove(), 600);
+function hideMessage(){
+  msg.style.opacity="0";
+  msg.style.filter="blur(15px)";
+  msg.style.transform="translateX(-50%) translateY(-300%)";
   clearTimeout(autoClose);
 }
 
-// ورود اولیه پیام
-setTimeout(showFullscreenMessage, 100);
+setTimeout(showFullscreenMessage,100);
+document.addEventListener('fullscreenchange',()=>{if(!document.fullscreenElement){setTimeout(showFullscreenMessage,100);}});
 
-// دوباره ظاهر شدن پیام در صورت خروج از فول‌اسکرین
-document.addEventListener('fullscreenchange', () => {
-  if (!document.fullscreenElement) {
-    const body = document.body;
-    if (!document.body.contains(msg)) {
-      document.body.appendChild(msg);
-    }
-    setTimeout(showFullscreenMessage, 100);
-  }
+msg.addEventListener('click',()=>{
+  const elem=document.documentElement;
+  if(elem.requestFullscreen) elem.requestFullscreen();
+  else if(elem.webkitRequestFullscreen) elem.webkitRequestFullscreen();
+  else if(elem.msRequestFullscreen) elem.msRequestFullscreen();
+  hideMessage();
 });
 
-// کلیک → فول‌اسکرین + حذف سریع
-msg.addEventListener('click', () => {
-  const elem = document.documentElement;
-  if (elem.requestFullscreen) elem.requestFullscreen();
-  else if (elem.webkitRequestFullscreen) elem.webkitRequestFullscreen();
-  else if (elem.msRequestFullscreen) elem.msRequestFullscreen();
-  hideMessage();
+const celebration=document.getElementById('celebration');
+const fireworks=document.getElementById('fireworks');
+
+function showCelebration(){
+  celebration.style.display='flex';
+  for(let i=0;i<80;i++){
+    const p=document.createElement('div');
+    p.className='particle';
+    p.style.left=Math.random()*100+'%';
+    p.style.top=Math.random()*100+'%';
+    const angle=Math.random()*360;
+    const dist=Math.random()*200+50;
+    p.style.setProperty('--x',dist*Math.cos(angle)+'px');
+    p.style.setProperty('--y',dist*Math.sin(angle)+'px');
+    p.style.color=`hsl(${Math.random()*360},100%,60%)`;
+    fireworks.appendChild(p);
+    setTimeout(()=>p.remove(),1200);
+  }
+}
+
+const switchBtn=document.getElementById('design-switch');
+let switchTimeout;
+
+switchBtn.addEventListener('click', ()=>{
+  document.body.classList.toggle('dark');
+  switchBtn.classList.add('expanded');
+  switchBtn.textContent = document.body.classList.contains('dark') ? '1D Design' : '1L Design';
+
+  if(switchTimeout) clearTimeout(switchTimeout);
+
+  switchTimeout = setTimeout(()=>{
+    switchBtn.classList.remove('expanded');
+    switchBtn.textContent = document.body.classList.contains('dark') ? '1D' : '1L';
+    switchTimeout = null;
+  },1000);
 });
 </script>
 </body>
