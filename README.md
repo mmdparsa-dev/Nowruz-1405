@@ -6,6 +6,8 @@ https://mmdparsa-dev.github.io/Nowruz-1405-/eid-noroz.html
 
 To view the latest beta version, visit: https://mmdparsa-dev.github.io/Nowruz-1405-/betav/eid-noroz.html
 
+a main page project:https://mmdparsa-dev.github.io/Nowruz-1405-
+
 در صورتی که پیشنهادی داريد و قصد دارید بگویید به سروش+ و تلگرام
 @mmdparsa_dev
 بفرستید.
