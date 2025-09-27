@@ -1,75 +1,120 @@
 <!DOCTYPE html>
 <html lang="fa" dir="rtl">
 <head>
-  <meta charset="UTF-8">
-  <title>بتا کیه؟</title>
-  <style>
-    @font-face {
-      font-family: 'Vazir Variable';
-      src: url('fonts/Vazir-Variable.woff2') format('woff2'),
-           url('fonts/Vazir-Variable.woff') format('woff');
-      font-weight: 100 900;
-      font-style: normal;
-      font-display: swap;
-    }
-
-    body {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-      margin: 0;
-      font-family: 'Vazir Variable', sans-serif;
-      font-weight: 400;
-      background-color: #f0f0f0;
-      color: #333;
-      flex-direction: column;
-      text-align: center;
-      transition: background-color 0.3s, color 0.3s;
-    }
-
-    body.dark {
-      background-color: #1e1e1e;
-      color: #eee;
-    }
-
-    h1 {
-      font-size: 10em;
-      margin: 0;
-    }
-
-    p {
-      font-size: 2em;
-      margin: 10px 0 20px 0;
-    }
-
-    button {
-      padding: 10px 20px;
-      font-size: 1.2em;
-      cursor: pointer;
-      border: none;
-      border-radius: 99px;
-      background-color: #666;
-      color: #fff;
-      font-family: 'Vazir Variable', sans-serif; /* فونت وزیر برای دکمه */
-      transition: background-color 0.3s;
-    }
-
-    button:hover {
-      background-color: #444;
-    }
-  </style>
+<meta charset="UTF-8" />
+<title>شمارش معکوس عید نوروز ۱۴۰۵</title>
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<link rel="stylesheet" href="font.css" />
+<link rel="icon" href="Icon(images)/favicon.ico" type="image/x-icon">
+<style>
+:root{
+  --ease-soft: cubic-bezier(0.18,0.9,0.32,1);
+  --grad-dur: 120s;
+  --anim-dur: 0.6s;
+}
+*{font-family:'Vazir Variable',sans-serif!important;box-sizing:border-box;color:#fff}
+html,body{height:100%;margin:0}
+body{margin:0;height:100vh;display:flex;justify-content:center;align-items:center;overflow:hidden;user-select:none;background:linear-gradient(135deg,#2E8B57,#1E90FF,#FF7F50,#FFD700,#3CB371,#87CEFA);background-size:600% 600%;animation:vibrantGradient var(--grad-dur) ease-in-out infinite;transition:background var(--anim-dur) var(--ease-soft)}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important} :root{--grad-dur:0.01s}}
+@keyframes vibrantGradient{0%{background-position:0% 50%}25%{background-position:50% 50%}50%{background-position:100% 50%}75%{background-position:50% 50%}100%{background-position:0% 50%}}
+.container{display:flex;flex-direction:column;align-items:center;gap:20px;padding:30px 40px;border-radius:50px;background:rgba(255,255,255,0.076);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);box-shadow:0 8px 40px rgba(0,0,0,0.35);border:1px solid rgba(255,255,255,0.25);transition:transform var(--anim-dur) var(--ease-soft),box-shadow var(--anim-dur) var(--ease-soft),background var(--anim-dur) var(--ease-soft)}
+.haftsine-icon{width:300px;height:auto;display:block}
+.countdown{display:flex;align-items:flex-end;justify-content:center;gap:clamp(2rem,6vw,8rem);font-weight:800;font-size:clamp(2rem,5vw,3.2rem);padding:16px 20px;transition:all var(--anim-dur) var(--ease-soft)}
+.time-unit{display:flex;flex-direction:column;align-items:center;gap:0.2rem;width:56px}
+.time-label{font-size:clamp(0.9rem,2.2vw,1.05rem);font-weight:700;opacity:0.95;color:#fff}
+.time-value{font-size:clamp(2.4rem,6vw,3.4rem);line-height:1;transition:transform 0.7s var(--ease-soft),opacity 0.7s var(--ease-soft),filter 0.7s var(--ease-soft);letter-spacing:0.04em}
+.countdown-title-box{font-weight:600;font-size:clamp(1.2rem,3.2vw,1.8rem);padding:18px 32px;border-radius:999px;background:rgba(255,255,255,0.08);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);text-align:center;box-shadow:0 6px 20px rgba(0,0,0,0.28);border:0.04px solid rgba(255,255,255,0.22);transition:all var(--anim-dur) var(--ease-soft);color:#fff}
+#fullscreen-msg{position:fixed;top:10px;left:50%;transform:translateX(-50%) translateY(-120%);background:rgba(255,255,255,0.076);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);box-shadow:0 8px 40px rgba(0,0,0,0.35);border:1px solid rgba(255,255,255,0.3);color:#fff;padding:12px 18px;font-size:1rem;font-weight:700;border-radius:12px;z-index:10000;text-align:center;opacity:0;cursor:pointer;filter:blur(12px);transition:all var(--anim-dur) var(--ease-soft)}
+#jalali-now{position:fixed;top:160px;right:14px;padding:8px 12px;background:rgba(255,255,255,0.08);border-radius:12px;backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);border:1px solid rgba(255,255,255,0.15);z-index:10000;font-weight:700;font-size:0.95rem;color:#fff;transition:all var(--anim-dur) var(--ease-soft); margin-top:-80px}
+#celebration{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.8);justify-content:center;align-items:center;flex-direction:column;z-index:10000;text-align:center;overflow:hidden}
+#fireworks{position:absolute;width:100%;height:100%;top:0;left:0;pointer-events:none}.particle{position:absolute;font-size:2rem;animation:particleAnim 1.2s var(--ease-soft) forwards;user-select:none}#newyear-msg{color:#FFD700;font-size:3rem;font-weight:800;margin-top:20px;background:rgba(255,255,255,0.076);padding:20px 40px;border-radius:20px;opacity:0;animation:msgFade 1.4s var(--ease-soft) forwards 0.4s}
+@keyframes particleAnim{0%{transform:translate(0,0) scale(1);opacity:1}100%{transform:translate(var(--x),var(--y)) scale(1.4);opacity:0}}@keyframes msgFade{to{opacity:1}}
+.top-actions{position:fixed;top:12px;left:12px;display:flex;gap:8px;z-index:10000}
+.action-btn{background:rgba(255,255,255,0.08);color:#fff;padding:8px 10px;border-radius:10px;border:1px solid rgba(255,255,255,0.12);cursor:pointer;font-weight:700;user-select:none;transition:transform var(--anim-dur) var(--ease-soft),opacity var(--anim-dur) var(--ease-soft),background var(--anim-dur) var(--ease-soft)}
+#design-switch{position:fixed;top:12px;right:12px;z-index:10000;width:50px;height:50px;border-radius:50%;background:rgba(255,255,255,0.076);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);box-shadow:0 8px 40px rgba(0,0,0,0.35);border:1px solid rgba(255,255,255,0.3);color:#fff;font-size:1rem;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all var(--anim-dur) var(--ease-soft);overflow:hidden}
+body.ui-hidden .top-actions .action-btn{opacity:0;pointer-events:none;transform:translateY(-6px) scale(0.98)}
+body.ui-hidden .top-actions #hide-ui-btn{opacity:1!important;pointer-events:auto!important;transform:none!important}
+body.ui-hidden #design-switch,body.ui-hidden #fullscreen-msg,body.ui-hidden #jalali-now,body.ui-hidden #github-btn{opacity:0;pointer-events:none;transform:translateY(-6px)}
+#hide-ui-btn.anim{transform:scale(1.06) translateY(-2px);background:rgba(255,255,255,0.14)}
+#hide-ui-btn{transition:transform var(--anim-dur) var(--ease-soft),background var(--anim-dur) var(--ease-soft)}
+#design-switch.active{transform:rotate(12deg) scale(1.04);background:rgba(255,255,255,0.12)}
+.dark-mode{background:linear-gradient(135deg,#1b5334,#125394,#994c30,#867200,#246943,#4a7088);background-size:600% 600%}
+.dark-mode .container{background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.04);box-shadow:0 8px 40px rgba(0,0,0,0.6);border:1px solid rgba(255,255,255,0.25)}
+.dark-mode .countdown-title-box{background:rgba(255,255,255,0.02);border:0.04px solid rgba(255,255,255,0.04)}
+.action-btn:focus,#design-switch:focus,#fullscreen-msg:focus{outline:3px solid rgba(255,255,255,0.18);outline-offset:3px;border-radius:10px}
+@media(max-width:420px){.haftsine-icon{width:220px}.time-value{font-size:clamp(1.8rem,4vw,2.5rem)}#jalali-now{top:180px}}
+</style>
 </head>
 <body>
-  <h1>فعلا بتایی منتشر نشده</h1>
-  <p>هر وقت منتشر شد بیا(استقبالتم می کنیم!)</p>
-  <button id="toggleTheme">دکمه ی کور نشدن/شدن</button>
-
-  <script>
-    const btn = document.getElementById('toggleTheme');
-    btn.addEventListener('click', () => {
-      document.body.classList.toggle('dark');
-    });
-  </script>
+  <div class="top-actions" aria-hidden="false">
+    <button class="action-btn" id="share-btn" title="اشتراک‌گذاری (s)" aria-label="اشتراک‌گذاری">اشتراک</button>
+    <button class="action-btn" id="screenshot-btn" title="اسکرین‌شات" aria-label="اسکرین‌شات">اسکرین‌شات</button>
+    <button class="action-btn" id="copy-link" title="کپی لینک پروژه (c)" aria-label="کپی لینک پروژه">کپی لینک</button>
+    <a class="action-btn" id="github-btn"title="رفتن به صفحه پروژه در گیت هاب" href="https://github.com/mmdparsa-dev/Nowruz-1405" target="_blank" rel="noopener" aria-label=>گیت هاب</a>
+    <button class="action-btn" id="hide-ui-btn" title="پنهان کردن دکمه‌ها (h)" aria-pressed="false" aria-label="پنهان/نمایش دکمه‌ها">مخفی‌سازی</button>
+  </div>
+  <div id="jalali-now" aria-hidden="false" title="تاریخ امروز به شمسی">— / — / —</div>
+  <div class="container" role="region" aria-label="شمارش معکوس تا تحویل سال">
+    <img src="Icon(images)/haft-sin.png" alt="هفت‌سین" class="haftsine-icon" />
+    <div class="countdown" role="timer" aria-live="polite" aria-atomic="true">
+      <div class="time-unit" aria-label="ثانیه"><div id="seconds" class="time-value">۰۰</div><div class="time-label">ثانیه</div></div>
+      <div class="time-unit" aria-label="دقیقه"><div id="minutes" class="time-value">۰۰</div><div class="time-label">دقیقه</div></div>
+      <div class="time-unit" aria-label="ساعت"><div id="hours" class="time-value">۰۰</div><div class="time-label">ساعت</div></div>
+      <div class="time-unit" aria-label="روز"><div id="days" class="time-value">۰۰</div><div class="time-label">روز</div></div>
+      <div class="time-unit" aria-label="ماه"><div id="months" class="time-value">۰۰</div><div class="time-label">ماه</div></div>
+    </div>
+    <div class="countdown-title-box">زمــــان باقـــــی‌مــــانــــده تا تحویـــــل ســــال ۱۴۰۵</div>
+  </div>
+  <div id="celebration" aria-hidden="true" aria-live="polite">
+    <div id="fireworks" aria-hidden="true"></div>
+    <div id="newyear-msg" role="status">سال نو مبارک!</div>
+  </div>
+  <div id="fullscreen-msg" role="button" tabindex="0">برای full screen شدن کلیک کنید یا کلید F را فشار دهید</div>
+  <button id="design-switch" aria-hidden="false" title="Design switch">1L</button>
+<script>
+function toPersianDigits(s){return s.toString().replace(/\d/g,d=>'۰۱۲۳۴۵۶۷۸۹'[d])}
+function isLeapJalali(y){const b=[-61,9,38,199,426,686,756,818,1111,1181,1210,1635,2060,2097,2192,2262,2324,2394,2456,3178];let n=0;for(let i=0;i<b.length;i++){if(y<b[i])break;n=b[i]}return((y-n)%33)%4===0}
+function gregorianToJalali(gy,gm,gd){let g_d_m=[0,31,59,90,120,151,181,212,243,273,304,334];let jy=gy-621;let days=365*(gy-1600)+Math.floor((gy-1600+3)/4)-Math.floor((gy-1600+99)/100)+Math.floor((gy-1600+399)/400)+gd+g_d_m[gm-1]-1-79;let j_np=Math.floor(days/12053);days%=12053;jy=979+33*j_np+4*Math.floor(days/1461);days%=1461;if(days>=366){jy+=Math.floor((days-1)/365);days=(days-1)%365}let jm=(days<186)?1+Math.floor(days/31):7+Math.floor((days-186)/30);let jd=1+((days<186)?(days%31):((days-186)%30));return[jy,jm,jd]}
+function daysInJalaliMonth(y,m){if(m<=6)return 31; if(m<=11) return 30; return isLeapJalali(y)?30:29}
+const targetUtc=new Date(Date.UTC(2026,2,20,3,26,39))
+const elems={months:document.getElementById('months'),days:document.getElementById('days'),hours:document.getElementById('hours'),minutes:document.getElementById('minutes'),seconds:document.getElementById('seconds')}
+const prevVals={}
+function animateChange(el,val){if(!el) return; if(prevVals[el.id]===val) return; prevVals[el.id]=val; el.style.transform='translateY(-6px) scale(0.98)'; el.style.opacity='0.7'; el.style.filter='blur(2px)'; setTimeout(()=>{el.textContent=val; el.style.transition='none'; el.style.transform='translateY(8px) scale(0.98)'; el.style.opacity='0'; el.style.filter='blur(1px)'; void el.offsetWidth; el.style.transition='transform 0.7s cubic-bezier(0.18,0.9,0.32,1), opacity 0.7s cubic-bezier(0.18,0.9,0.32,1), filter 0.7s cubic-bezier(0.18,0.9,0.32,1)'; el.style.transform='translateY(0) scale(1)'; el.style.opacity='1'; el.style.filter='blur(0)';},300)}
+const jalaliBadge=document.getElementById('jalali-now')
+function updateJalaliNow(){const n=new Date();const r=gregorianToJalali(n.getFullYear(),n.getMonth()+1,n.getDate());jalaliBadge.textContent=`${toPersianDigits(String(r[0]))} / ${toPersianDigits(String(r[1]).padStart(2,'0'))} / ${toPersianDigits(String(r[2]).padStart(2,'0'))}`}
+function update(){const now=new Date();const diff=targetUtc-now; if(diff<=0){showCelebration(); return} const totalSeconds=Math.floor(diff/1000); const seconds=totalSeconds%60; const totalMinutes=Math.floor(totalSeconds/60); const minutes=totalMinutes%60; const totalHours=Math.floor(totalMinutes/60); const hours=totalHours%24; const [jyNow,jmNow,jdNow]=gregorianToJalali(now.getUTCFullYear(),now.getUTCMonth()+1,now.getUTCDate()); const [jyTarget,jmTarget,jdTarget]=gregorianToJalali(targetUtc.getUTCFullYear(),targetUtc.getUTCMonth()+1,targetUtc.getUTCDate()); let months=(jyTarget-jyNow)*12+(jmTarget-jmNow); let days=jdTarget-jdNow; while(days<0){months-=1; let prevMonth=jmTarget-1; let prevYear=jyTarget; if(prevMonth===0){prevMonth=12; prevYear-=1} days+=daysInJalaliMonth(prevYear,prevMonth)} if(months<0) months=0; animateChange(elems.months,toPersianDigits(String(months).padStart(2,'0'))); animateChange(elems.days,toPersianDigits(String(days).padStart(2,'0'))); animateChange(elems.hours,toPersianDigits(String(hours).padStart(2,'0'))); animateChange(elems.minutes,toPersianDigits(String(minutes).padStart(2,'0'))); animateChange(elems.seconds,toPersianDigits(String(seconds).padStart(2,'0'))); updateJalaliNow()}
+setInterval(update,500)
+update()
+const msg=document.getElementById('fullscreen-msg')
+let autoClose
+function showFullscreenMessage(){msg.style.transform='translateX(-50%) translateY(0)'; msg.style.opacity='1'; msg.style.filter='blur(0)'; if(navigator.vibrate) navigator.vibrate(30); autoClose=setTimeout(hideMessage,3800)}
+function hideMessage(){msg.style.opacity='0'; msg.style.filter='blur(12px)'; msg.style.transform='translateX(-50%) translateY(-120%)'; clearTimeout(autoClose)}
+setTimeout(showFullscreenMessage,120)
+msg.addEventListener('click',()=>{requestFullScreen(); hideMessage()}); msg.addEventListener('keydown',(e)=>{ if(e.key.toLowerCase()==='f'){requestFullScreen(); hideMessage()}})
+function requestFullScreen(){const el=document.documentElement; if(el.requestFullscreen) el.requestFullscreen(); else if(el.webkitRequestFullscreen) el.webkitRequestFullscreen(); else if(el.msRequestFullscreen) el.msRequestFullscreen()}
+document.addEventListener('fullscreenchange',()=>{ if(!document.fullscreenElement) setTimeout(showFullscreenMessage,120)})
+const celebration=document.getElementById('celebration')
+const fireworks=document.getElementById('fireworks')
+const newyearMsg=document.getElementById('newyear-msg')
+const particleEmojis=['🎆','🎉','✨','🌸','🌟','🎊']
+function showCelebration(){celebration.style.display='flex'; celebration.setAttribute('aria-hidden','false'); fireworks.innerHTML=''; for(let i=0;i<110;i++){const p=document.createElement('div'); p.className='particle'; p.style.left=(25+Math.random()*50)+'%'; p.style.top=(10+Math.random()*70)+'%'; const angle=Math.random()*Math.PI*2; const dist=Math.random()*260+60; const x=Math.round(dist*Math.cos(angle)); const y=Math.round(dist*Math.sin(angle)); p.style.setProperty('--x',x+'px'); p.style.setProperty('--y',y+'px'); p.textContent=particleEmojis[Math.floor(Math.random()*particleEmojis.length)]; p.style.fontSize=(12+Math.random()*30)+'px'; fireworks.appendChild(p); setTimeout(()=>p.remove(),1600)} newyearMsg.style.opacity='1'}
+const shareBtn=document.getElementById('share-btn')
+const screenshotBtn=document.getElementById('screenshot-btn')
+const copyBtn=document.getElementById('copy-link')
+const hideUiBtn=document.getElementById('hide-ui-btn')
+const githubBtn=document.getElementById('github-btn')
+shareBtn.addEventListener('click',async()=>{const data={title:document.title,text:'شمارش معکوس نوروز ۱۴۰۵',url:window.location.href}; if(navigator.share){try{await navigator.share(data); return}catch(e){} } try{await navigator.clipboard.writeText(window.location.href); shareBtn.textContent='لینک کپی شد ✓'; setTimeout(()=>shareBtn.textContent='اشتراک',1400)}catch(e){shareBtn.textContent='خطا'; setTimeout(()=>shareBtn.textContent='اشتراک',1400)}})
+copyBtn.addEventListener('click',async()=>{try{await navigator.clipboard.writeText(window.location.href); copyBtn.textContent='کپی شد ✓'; setTimeout(()=>copyBtn.textContent='کپی لینک',1400)}catch(e){copyBtn.textContent='خطا'; setTimeout(()=>copyBtn.textContent='کپی لینک',1400)}})
+let html2Loaded=false
+screenshotBtn.addEventListener('click',async()=>{const container=document.querySelector('.container'); const imgs=Array.from(container.querySelectorAll('img')); imgs.forEach(img=>{try{if(!img.crossOrigin) img.crossOrigin='anonymous'; const src=img.getAttribute('src'); if(src && !src.startsWith('data:')){setTimeout(()=>{img.src=src},0)}}catch(e){}}); if(!html2Loaded){screenshotBtn.textContent='در حال بارگذاری...'; try{await loadScript('https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js'); html2Loaded=true}catch(e){alert('بارگذاری کتابخانه‌ی اسکرین‌شات ناموفق بود'); screenshotBtn.textContent='اسکرین‌شات'; return} finally{screenshotBtn.textContent='اسکرین‌شات'}} try{screenshotBtn.textContent='در حال ساخت تصویر...'; const canvas=await window.html2canvas(container,{useCORS:true,allowTaint:false,backgroundColor:null,scale:Math.min(2,window.devicePixelRatio||1)}); const data=canvas.toDataURL('image/png'); const w=window.open(''); if(!w){alert('برای نمایش تصویر اجازه popup بده'); screenshotBtn.textContent='اسکرین‌شات'; return} w.document.title='screenshot'; const img=w.document.createElement('img'); img.src=data; img.style.maxWidth='100%'; w.document.body.style.background='#111'; w.document.body.style.display='flex'; w.document.body.style.alignItems='center'; w.document.body.style.justifyContent='center'; w.document.body.style.margin='0'; w.document.body.appendChild(img)}catch(err){console.error(err); alert('خطا در ساخت تصویر. ممکن است منابع تصویری محلی یا هدر CORS مشکل‌ساز باشد')}finally{screenshotBtn.textContent='اسکرین‌شات'}})
+function loadScript(src){return new Promise((res,rej)=>{const s=document.createElement('script'); s.src=src; s.onload=()=>res(); s.onerror=()=>rej(); document.head.appendChild(s)})}
+let uiHidden=false
+hideUiBtn.addEventListener('click',()=>{uiHidden=!uiHidden; document.body.classList.toggle('ui-hidden',uiHidden); hideUiBtn.setAttribute('aria-pressed',String(uiHidden)); hideUiBtn.textContent=uiHidden?'نمایش':'مخفی‌سازی'; hideUiBtn.classList.add('anim'); setTimeout(()=>hideUiBtn.classList.remove('anim'),500)})
+switchBtn=document.getElementById('design-switch')
+switchBtn.addEventListener('click',()=>{document.body.classList.toggle('dark-mode'); switchBtn.classList.add('active'); setTimeout(()=>switchBtn.classList.remove('active'),700)})
+document.addEventListener('keydown',(e)=>{const k=e.key.toLowerCase(); if(k==='f'){requestFullScreen(); hideMessage()} if(k==='h'){hideUiBtn.click()} if(k==='c'){copyBtn.click()} if(k==='s'){shareBtn.click()} if(k==='p'){screenshotBtn.click()}})
+document.addEventListener('pointerdown',()=>{}, {once:true})
+updateJalaliNow()
+</script>
 </body>
 </html>
